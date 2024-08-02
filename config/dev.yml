@@ -1,3 +1,25 @@
 ---
+vpc_id: vpc-07dd42ad3ded9dbd6
+
 s3:
-  - bucket_name: dev-local-taxes-mgmt-data-bucket
+  - bucket_name: s3-ltm-dev-data
+
+aurora:
+  cluster_id: aurora-ltm-dev-cluster
+  username: admin
+  credentials_secret_name: secretmanager-ltm-dev-aurora-secret
+  database_name: db-ltm-dev
+  database_port: 3306
+  removal_policy: DESTROY
+  min_capacity: 0.5
+  max_capacity: 1.0
+  instance_class: db.t3.small
+  writer_instance_id: ec2-ltm-dev-aurora-writer
+  rds_proxy:
+    name: rds-ltm-dev-aurora-proxy
+    role_name: iam-ltm-dev-rds-proxy-role
+    security_group: ec2-ltm-dev-rds-proxy-sg
+  bastion_host:
+    enabled: true
+    name: ec2-ltm-dev-aurora-bh
+    security_group: ec2-ltm-dev-aurora-bh-sg

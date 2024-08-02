@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from os import environ
 import sys
 
 import aws_cdk as cdk
@@ -16,7 +17,14 @@ if stage is None or stage == "unknown":
     )
 
 stage_config = utils.load_stage_config(stage=stage)
-
-LocalTaxMgmtStack(scope=app, id="LocalTaxMgmtStack", config=stage_config)
+LocalTaxMgmtStack(
+    scope=app,
+    id="LocalTaxMgmtStack",
+    config=stage_config,
+    env=cdk.Environment(
+        account=environ["CDK_DEFAULT_ACCOUNT"],
+        region=environ["CDK_DEFAULT_REGION"],
+    ),
+)
 
 app.synth()
