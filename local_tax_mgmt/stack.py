@@ -1,6 +1,8 @@
 from aws_cdk import Stack
 from constructs import Construct
 
+from .s3 import S3Construct
+
 
 class LocalTaxMgmtStack(Stack):
 
@@ -8,3 +10,5 @@ class LocalTaxMgmtStack(Stack):
         self, scope: Construct, id: str, config: dict, **kwargs
     ) -> None:
         super().__init__(scope, id, **kwargs)
+
+        s3 = S3Construct(scope=self, id="S3Construct", config=config)

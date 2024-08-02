@@ -1,0 +1,3 @@
+---
+s3:
+  - bucket_name: dev-local-taxes-mgmt-data-bucket
